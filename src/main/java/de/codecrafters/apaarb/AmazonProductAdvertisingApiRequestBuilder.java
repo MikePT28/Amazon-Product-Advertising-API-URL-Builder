@@ -203,7 +203,7 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
         private final ItemId itemId;
 
         private ItemCondition itemCondition = ItemCondition.ALL;
-
+        private ItemCategory itemCategory = ItemCategory.ALL;
 
         private AdvertisingApiItemLookupRequestBuilder(final ItemId itemId) {
             this.itemId = itemId;
@@ -217,6 +217,17 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
          */
         public AdvertisingApiItemLookupRequestBuilder includeInformationAbout(final ItemInformation itemInformation) {
             responseGroup.add(itemInformation);
+            return this;
+        }
+        
+        /**
+         * Specifies the {@link ItemCategory} that will be searched.
+         *
+         * @param itemCategory The {@link ItemCategory} that will be searched.
+         * @return The current {@link AdvertisingApiItemLookupRequestBuilder}.
+         */
+        public AdvertisingApiItemLookupRequestBuilder filterByCategroy(final ItemCategory itemCategory) {
+            this.itemCategory = itemCategory;
             return this;
         }
 
@@ -268,6 +279,7 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
             requestParams.put("ItemId", itemId.getValue());
             requestParams.put("Operation", OPERATION);
             requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
+            requestParams.put("SearchIndex", itemCategory.getRequestValue());
             requestParams.put("Service", SERVICE);
             requestParams.put("Timestamp", DATE_FORMATTER.format(new Date()));
             requestParams.put("Version", VERSION);

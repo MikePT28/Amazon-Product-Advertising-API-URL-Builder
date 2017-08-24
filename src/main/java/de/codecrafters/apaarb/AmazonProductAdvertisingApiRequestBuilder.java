@@ -75,6 +75,7 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
         private ItemCategory itemCategory = ItemCategory.ALL;
         private int maximumPrice = -1;
         private int minimumPrice = -1;
+        private String power = "";
 
 
         private AdvertisingApiItemSearchRequestBuilder(final String keywords) {
@@ -139,6 +140,18 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
         }
 
         /**
+        * Specifies the power attribute for this request.
+        * For example, binding: Paperback or Hardcover.
+        *
+        * @param power The string representing the power attribute.
+        * @return The current {@link AdvertisingApiItemSearchRequestBuilder}.
+        */
+        public AdvertisingApiItemSearchRequestBuilder filterByPower(final String power) {
+            this.power = power;
+            return this;
+        }
+
+        /**
          * Creates the signed request http-url for the given service using the given {@link AmazonWebServiceAuthentication}.
          *
          * @param serviceLocation The location of the Amazon service that shall be used.
@@ -184,6 +197,7 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
             if (minimumPrice != -1) {
                 requestParams.put("MinimumPrice", "" + minimumPrice);
             }
+            if (power != "") requestParams.put("Power", power);
 
             return RequestUrlUtils.createSignedRequestUrl(protocol, serviceLocation.getWebServiceUrl(), ROUTE,
                     requestParams, authentication.getAwsSecretKey());
@@ -219,7 +233,7 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
             responseGroup.add(itemInformation);
             return this;
         }
-        
+
         /**
          * Specifies the {@link ItemCategory} that will be searched.
          *

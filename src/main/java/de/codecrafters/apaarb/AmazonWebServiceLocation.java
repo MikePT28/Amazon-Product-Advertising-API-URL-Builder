@@ -29,4 +29,9 @@ public enum AmazonWebServiceLocation {
         return webServiceUrl;
     }
 
+    @Override
+    public String toString() {
+        return getWebServiceUrl();
+    }
+
 }

@@ -183,14 +183,14 @@ public final class AmazonProductAdvertisingApiRequestBuilder {
             final Map<String, String> requestParams = new LinkedHashMap<>();
             requestParams.put("AWSAccessKeyId", authentication.getAwsAccessKey());
             requestParams.put("AssociateTag", authentication.getAssociateTag());
-            requestParams.put("Condition", itemCondition.getRequestValue());
+            //requestParams.put("Condition", itemCondition.getRequestValue());
             requestParams.put("Keywords", keywords);
             requestParams.put("Operation", OPERATION);
             requestParams.put("ResponseGroup", createResponseGroupRequestValue(responseGroup));
             requestParams.put("SearchIndex", itemCategory.getRequestValue());
             requestParams.put("Service", SERVICE);
             requestParams.put("Timestamp", DATE_FORMATTER.format(new Date()));
-            requestParams.put("Version", VERSION);
+            //requestParams.put("Version", VERSION);
             if (maximumPrice != -1) {
                 requestParams.put("MaximumPrice", "" + maximumPrice);
             }
